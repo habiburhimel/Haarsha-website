@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Habibur Rahman Himel</title>
+
+  <!-- Lottie -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (for social icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root{
+      --emerald: #2ECC71;
+      --bg-dark: #0d1b26;
+      --max-w: 1100px;
+
+      --social-bg-start: #0a3d62; /* blue top */
+      --social-bg-end:   #08263e; /* blue bottom */
+      --social-icon-bg: rgba(255,255,255,0.08);
+      --social-icon-hover: #ffffff;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      background:#071019;
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    a{color:var(--emerald);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: var(--bg-dark);
+      z-index: 999;
+      display: flex;
+      align-items:center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      gap:12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+
+    .brand {
+      font-family: 'Pacifico', cursive;
+      font-size:20px;
+      color: var(--emerald);
+      text-decoration: none;
+    }
+
+    /* inline links (desktop) */
+    .links {
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+    .links a.link {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+    .links a.link:hover {
+      color: #00d4ff;
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* hamburger (hidden by default - shown on mobile) */
+    .hamburger {
+      display: none;
+      width:40px;
+      height:40px;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      background:transparent;
+      border-radius:8px;
+      border: none;
+    }
+    .hamburger span {
+      display:block;
+      width:22px;
+      height:2.5px;
+      background:#fff;
+      margin:3px 0;
+      border-radius:2px;
+      transition: transform .25s ease, opacity .2s ease;
+    }
+
+    /* Mobile dropdown menu (hidden by default) */
+    .mobile-menu {
+      display:none; /* shown only on mobile when toggled */
+      position: fixed;
+      top: 64px;
+      right: 18px;
+      background: var(--bg-dark);
+      padding: 12px;
+      border-radius: 10px;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+      z-index: 1500;
+      min-width: 180px;
+    }
+    .mobile-menu a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 8px;
+      display:block;
+    }
+    .mobile-menu a:hover { background: rgba(255,255,255,0.03); color: #00d4ff; }
+
+    /* show/active states */
+    .mobile-menu.show { display:flex; }
+    .hamburger.active span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2){ opacity: 0; }
+    .hamburger.active span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+    /* PAGE LAYOUT */
+    .page{ max-width:var(--max-w); margin:110px auto; padding:0 20px; }
+
+    .hero {
+      height: 78vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(2,6,23,0.6);
+      position: relative;
+    }
+    .hero::after{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(13,27,38,0.45), rgba(13,27,38,0.70)); }
+    .hero .content{position:relative;z-index:2;padding:20px;}
+    .hero h1{font-size:60px;margin:0 0 10px;}
+    .hero p{font-size:22px;color:#e6f7ef;margin:0;}
+
+    .section{ padding:50px; background:var(--bg-dark); border-radius:12px; margin-bottom:30px; box-shadow:0 8px 30px rgba(0,0,0,0.5); }
+    .section-title{ margin-bottom:10px; font-size:26px; color:var(--emerald); }
+    p.lead{ color:#dfeee6 }
+
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+    .cols-2-1{display:grid;grid-template-columns:2fr 1fr;gap:22px;}
+    @media (max-width:900px) {
+      .cols,.cols-2-1{grid-template-columns:1fr;}
+      .hero h1{font-size:42px}
+      .hero p{font-size:16px}
+      /* On mobile, hide desktop inline links and show hamburger */
+      .links { display: none !important; }
+      .hamburger { display: flex; }
+      /* keep content offset: ensure page content not covered by navbar */
+      .page { margin-top: 120px; }
+    }
+
+    .card{ background:#0f2a1e; padding:18px; border-radius:12px; border-left:6px solid var(--emerald); }
+    details{ background:rgba(255,255,255,0.03); padding:16px; border-radius:10px; margin-top:12px; }
+    summary{ cursor:pointer; font-size:17px; font-weight:600; }
+
+    input, textarea{ width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.1); background:transparent; color:white; }
+    input[type="submit"]{ background:var(--emerald); color:#032; font-weight:600; cursor:pointer; border:none; margin-top:10px; padding:10px 14px; border-radius:8px; }
+
+    /* Social section (Blue background) */
+    .social-section { margin-top: 40px; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(2,6,23,0.6); }
+    .social-hero {
+      padding: 48px 20px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:14px;
+      background: linear-gradient(180deg, var(--social-bg-start), var(--social-bg-end)); color: #fff; text-align:center;
+    }
+    .social-hero h3 { margin:0; font-size:24px; }
+    .social-label { color:#e6ffef; opacity:0.95; margin-bottom:6px }
+    .social-icons { display:flex; gap:16px; align-items:center; justify-content:center; flex-wrap:wrap; }
+    .social-icon { width:48px; height:48px; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; background: var(--social-icon-bg); color:#fff; font-weight:700; text-decoration:none; transition: all .14s ease; border:2px solid rgba(255,255,255,0.06); font-size:18px; }
+    .social-icon:hover { transform: translateY(-6px); background: var(--social-icon-hover); color: #04402a; }
+
+    footer{ text-align:center; color:#8da8a0; padding:20px 0; font-size:13px; margin-top:36px; }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar" role="navigation" aria-label="Main">
+    <a class="brand" href="#home">Habibur Rahman Himel</a>
+
+    <!-- Desktop inline links -->
+    <nav class="links" aria-label="Primary">
+      <a class="link" href="#home">Home</a>
+      <a class="link" href="#about">About</a>
+      <a class="link" href="#achievements">Achievements</a>
+      <a class="link" href="#projects">Projects</a>
+      <a class="link" href="#interests">Interests</a>
+      <a class="link" href="#contact">Contact</a>
+    </nav>
+
+    <!-- Hamburger (only visible on mobile) -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu (toggled by hamburger). Hidden by default on desktop. -->
+  <nav id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#projects">Projects</a>
+    <a href="#interests">Interests</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main class="page" role="main">
+    <!-- HERO -->
+    <section class="hero" id="home" role="banner">
+      <div class="content">
+        <h1>Hello!</h1>
+        <p>Welcome to my website.</p>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading" class="section-title">About Me</h2>
+      <p class="lead">
+        Hi, I’m <strong>Habibur Rahman Himel</strong>. I’m 21 years old and originally from Bangladesh. I’m currently an undergraduate student at UC Berkeley. I’m passionate about AI, machine learning, NLP, robotics, and building human-centered software. I also enjoy creating educational content and tech vlogs.
+      </p>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section class="section" id="achievements" aria-labelledby="ach-heading">
+      <h2 id="ach-heading" class="section-title">Achievements & Awards</h2>
+
+      <details>
+        <summary>Click here to learn about Himel’s Achievements</summary>
+
+        <div style="margin-top:14px;" class="card">
+          <h3>National Champion — Bangladesh Mathematical Olympiad (BdMO)</h3>
+          <p>Recognized nationwide for excellence in mathematical problem solving and Olympiad performance.</p>
+        </div>
+
+        <div style="margin-top:14px;" class="card">
+          <h3>Dhaka Division Champion — Bangladesh National Education Week</h3>
+          <p>Awarded for outstanding academic performance and leadership within Dhaka Division.</p>
+        </div>
+
+      </details>
+    </section>
+
+    <!-- PASSION / WHAT I DO -->
+    <section class="section" id="interests" aria-labelledby="passion-heading">
+      <h2 id="passion-heading" class="section-title">Passion & What I Do</h2>
+
+      <div class="cols" role="region" aria-label="Passion and Lottie">
+        <div class="card">
+          <h3>Passion</h3>
+          <p class="lead">I design and build intelligent systems that make tools more human-friendly. My interests include deep learning, NLP, robotics, and interactive software.</p>
+
+          <h3 style="margin-top:15px;">What I Do</h3>
+          <ul>
+            <li>Produce educational videos on physics, math and engineering.</li>
+            <li>Create tech & lifestyle vlogs to share learning journeys.</li>
+            <li>Build small interactive apps and tools to help learners.</li>
+            <li>Write tutorials and guides for students and developers.</li>
+          </ul>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:center;">
+          <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_qp1q7mct.json" background="transparent" speed="1" style="width:100%;max-width:360px;" loop autoplay></lottie-player>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects" aria-labelledby="projects-heading">
+      <h2 id="projects-heading" class="section-title">From Mind to Masterpiece: My Brother’s Creations</h2>
+
+      <div class="cols-2-1" role="region" aria-label="Projects">
+        <div class="card">
+          <h3>Explaining Physics, Math and Engineering Simply</h3>
+          <p class="lead">On my YouTube channel I share clear, practical lessons in Physics, Mathematics and Engineering — designed to make complex ideas accessible.</p>
+          <p><a href="https://www.youtube.com/@imYBS.7" target="_blank" rel="noopener">Watch videos →</a></p>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:center;">
+          <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_0yfsb3a1.json" background="transparent" speed="1" style="width:100%;max-width:360px;" loop autoplay></lottie-player>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading" class="section-title">Get in Touch With Me!</h2>
+
+      <div class="cols" role="form" aria-label="Contact form and details">
+        <div class="card">
+          <p>Send me a message using this form:</p>
+
+          <form action="https://formsubmit.co/himel3655@gmail.com" method="POST" target="_blank" novalidate>
+            <div class="field">
+              <label style="display:block;margin-bottom:6px">Your Name</label>
+              <input type="text" name="name" required />
+            </div>
+
+            <div class="field">
+              <label style="display:block;margin-bottom:6px">Your Email</label>
+              <input type="email" name="email" required />
+            </div>
+
+            <div class="field">
+              <label style="display:block;margin-bottom:6px">Your Message</label>
+              <textarea name="message" rows="5" required></textarea>
+            </div>
+
+            <input type="hidden" name="_subject" value="New message from your website" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="https://example.com/thank-you" />
+
+            <input type="submit" value="Send Message (opens FormSubmit in new tab)" />
+            <p class="muted" style="margin-top:8px;">A new tab will open to complete sending. If it doesn't, allow pop-ups or click the button again.</p>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Or email me directly:</h3>
+          <p><a href="mailto:himel3655@gmail.com">himel3655@gmail.com</a></p>
+
+          <div style="margin-top:16px">
+            <h4 style="color:var(--emerald)">More Links</h4>
+            <p><a href="https://www.youtube.com/@HRH.02" target="_blank" rel="noopener">YouTube - HRH.02</a><br>
+            <a href="https://www.youtube.com/@imYBS.7" target="_blank" rel="noopener">YouTube - imYBS.7</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL -->
+    <section class="social-section" aria-label="Social links">
+      <div class="social-hero" role="region" aria-labelledby="social-heading">
+        <h3 id="social-heading">Social Links</h3>
+        <p class="social-label">Connect with me on social media</p>
+
+        <div class="social-icons" role="list">
+          <a class="social-icon" role="listitem" href="https://t.me/habiburhimel" target="_blank" rel="noopener" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+          <a class="social-icon" role="listitem" href="https://www.facebook.com/habibur.himel5337" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a class="social-icon" role="listitem" href="https://www.instagram.com/__code_crafted__/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a class="social-icon" role="listitem" href="https://x.com/HabiburHim14360" target="_blank" rel="noopener" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a class="social-icon" role="listitem" href="mailto:himel.berkeley@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <footer><div>Made with ❤️ by Habibur Rahman Himel • Theme: Emerald Green</div></footer>
+  </main>
+
+  <script>
+    // Mobile hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      const isActive = hamburger.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+      mobileMenu.classList.toggle('show');
+      mobileMenu.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+    });
+
+    // Close mobile menu when clicking a link inside it
+    mobileMenu.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', ()=>{
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded','false');
+        mobileMenu.classList.remove('show');
+        mobileMenu.setAttribute('aria-hidden','true');
+      });
+    });
+
+    // Smooth anchor scrolling for internal links (desktop + mobile brand)
+    document.querySelectorAll('.links a.link, .mobile-menu a, .brand').forEach(a=>{
+      a.addEventListener('click', function(e){
+        const href = this.getAttribute('href') || '';
+        if(!href.startsWith('#')) return;
+        e.preventDefault();
+        const id = href.slice(1);
+        const el = document.getElementById(id);
+        if(!el) return;
+        // if mobile menu open, close it
+        if(mobileMenu.classList.contains('show')) {
+          hamburger.classList.remove('active');
+          mobileMenu.classList.remove('show');
+          mobileMenu.setAttribute('aria-hidden','true');
+          hamburger.setAttribute('aria-expanded','false');
+        }
+        const y = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
